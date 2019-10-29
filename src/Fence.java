@@ -11,5 +11,4 @@ class Fence extends Rectangle {
 	    setTranslateY(Piece.rowToY(row));
 	}
 	
-
 }

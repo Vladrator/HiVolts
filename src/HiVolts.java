@@ -1,11 +1,14 @@
 import javafx.animation.AnimationTimer;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Parent;
@@ -13,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,9 +32,10 @@ public class HiVolts extends Application {
     final static int WIDTH = 50;
     final static int HEIGHT = 50;
     final static int PANESIZE = 1000;
+    static String death = "You died... restarting!";
 
     static Board board;
-    static Avatar you;
+    public static Avatar you;
     static Label label;
 
     private Parent createContent() {
@@ -38,7 +43,7 @@ public class HiVolts extends Application {
         gPane = new GridPane();
         root.setPrefSize(PANESIZE, PANESIZE);
         
-        board = new Board(12, 12, 20, 12);
+        board = new Board(12, 12, 0, 6);
         setupBoard(root, board);
         addLabel();
         addButton();
@@ -86,22 +91,44 @@ public class HiVolts extends Application {
         gPane.setValignment(button, VPos.BOTTOM);
         gPane.add(button, 1, 1);
     }
-
+    
     private List<Shape> pieces() {
         return root.getChildren().stream().map(n -> (Shape)n).collect(Collectors.toList());
     }
 
+	public static List<Piece> didNotMove = new ArrayList<>();
+	
+	
     private void update() {
+    	if (you.alive == false) {
+    		return;
+    	}
         // move all the mhos
         pieces().forEach(s -> {
-            if (s instanceof Piece) {
+        	if (s instanceof Piece) {
                 if (((Piece) s).pieceType == "mho") {
-                    Mho ss = (Mho) s;
-  //                  ss.move();
+                    Mho m = (Mho) s;
+                    m.move();
                 }
             }
         });
-
+        // if there are any mhos that failed to move because there was anther mhos, check
+        // 		again to see if they can move
+        
+        while(!didNotMove.isEmpty() && you.alive) {
+        	List<Piece> moveFail = new ArrayList<>();
+        	
+        	for (Piece p : didNotMove) {
+        		moveFail.add(p);
+        	}
+        	didNotMove = new ArrayList<>();
+        	
+        	for (Piece p : moveFail) {
+        		Mho m = (Mho) p;
+        		m.move();
+        	}
+        }
+        
         // remove any who have died
         root.getChildren().removeIf(n -> {
             if (n instanceof Piece) {
@@ -114,7 +141,6 @@ public class HiVolts extends Application {
 
     }
 
-
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -124,22 +150,23 @@ public class HiVolts extends Application {
     void startUp(Stage stage) {
         Scene scene = new Scene(createContent());
 
+       
         scene.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case A:
-                    you.moveLeft();
-                    break;
-                case D:
- //                   you.moveRight();
-                    break;
-                case X:
-   //                 you.moveDown();
-                    break;
-                case W:
-     //               you.moveUp();
-                    break;
+        	
+            if (you.move(e.getCode())) {
+            	System.out.println("avatar " + you.col + " " + you.row);
+            	update();
             }
-            update();
+            
+            if (you.alive == false) {
+            	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            	alert.setTitle("Restart");
+            	alert.setHeaderText(null);
+            	alert.setContentText(death);
+            	alert.showAndWait();
+            	startUp(this.stage);
+            }
+            
             label.setText("" + e.getCode());
         });
 

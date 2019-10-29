@@ -15,11 +15,11 @@ public class Board {
 	 * 3 = mho
 	 */
 	public static void main(String[] args) {
-		Board board = new Board(12, 12, 20, 12);
+		Board board = new Board(12, 12, 0, 0);
 		board.printBoard();
 	}
 	
-	Board(int rows, int cols, int fences, int mhos) {
+	public Board(int rows, int cols, int fences, int mhos) {
 		ROWS = rows;
 		COLS = cols;
 		FENCES = fences;
@@ -113,7 +113,7 @@ public class Board {
 
 	}
 
-	public void printBoard() {
+	void printBoard() {
 		for(int row=0; row < ROWS; row++) {
 			for(int col=0; col <COLS; col++) {
 				if (squares[row][col] == 0) {
