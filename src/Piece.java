@@ -69,8 +69,36 @@ public class Piece extends Rectangle {
 
 	public void moveJump() { 
 		toFront();
-		setX(colToX(col));
-		setY(rowToY(row));
+		Timeline timeline  = new Timeline(); 
+		KeyValue xKeyValue  = new KeyValue(xProperty(), colToX(col));
+		KeyFrame xKeyFrame  = new KeyFrame(Duration.millis(300), xKeyValue);
+		timeline.getKeyFrames().addAll(xKeyFrame);
+		
+		KeyValue yKeyValue  = new KeyValue(yProperty(), rowToY(row));
+		KeyFrame yKeyFrame  = new KeyFrame(Duration.millis(300), yKeyValue);
+		timeline.getKeyFrames().addAll(yKeyFrame);
+		
+		double increase = 2;
+		
+		KeyValue heightValue  = new KeyValue(heightProperty(), HiVolts.HEIGHT * increase);
+		KeyFrame heightKeyFrame  = new KeyFrame(Duration.millis(150), heightValue);
+		timeline.getKeyFrames().addAll(heightKeyFrame);
+		
+		//transform back to original height
+		heightValue  = new KeyValue(heightProperty(),HiVolts.HEIGHT);
+		heightKeyFrame  = new KeyFrame(Duration.millis(300), heightValue);
+		timeline.getKeyFrames().addAll(heightKeyFrame);
+		
+		KeyValue widthValue  = new KeyValue(widthProperty(), HiVolts.WIDTH * increase);
+		KeyFrame widthKeyFrame  = new KeyFrame(Duration.millis(150), widthValue);
+		timeline.getKeyFrames().addAll(widthKeyFrame);
+		
+		//transform back to original width
+		widthValue  = new KeyValue(widthProperty(), HiVolts.WIDTH);
+		widthKeyFrame  = new KeyFrame(Duration.millis(300), widthValue);
+		timeline.getKeyFrames().addAll(widthKeyFrame);
+		
+		timeline.play();
 	}
 	
 	public void slide(DoubleProperty xTarget, double newX, DoubleProperty yTarget, double newY) {
