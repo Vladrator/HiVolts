@@ -6,7 +6,7 @@ public class Board {
 	int FENCES;
 	int MHOS;
 	public int[][] squares;
-	boolean test = true;
+	boolean test = false;
 	int [][] testSquares = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
 			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},

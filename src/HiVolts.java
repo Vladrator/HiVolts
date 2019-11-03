@@ -1,5 +1,3 @@
-import javafx.animation.AnimationTimer;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,7 +6,6 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.Parent;
@@ -72,7 +69,7 @@ public class HiVolts extends Application {
     }
 
     private void addLabel() {
-        label = new Label("hello");
+        label = new Label("Game Starting");
         gPane.setHalignment(label, HPos.CENTER);
         gPane.setValignment(label, VPos.BOTTOM);
         gPane.add(label, 0, 0);
@@ -175,7 +172,7 @@ public class HiVolts extends Application {
             	alert.showAndWait();
             	startUp(this.stage);
             }
-            label.setText("" + e.getCode());
+            label.setText(Mho.mhoNum + " Mhos left");
         });
 
         stage.setScene(scene);
