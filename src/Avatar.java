@@ -8,8 +8,8 @@ import javafx.scene.paint.ImagePattern;
 
 class Avatar extends Piece {
 
-	Avatar(int col, int row) {
-		super(col, row, "you", Color.AQUA);
+	Avatar(int row, int col) {
+		super(row, col, "you", Color.AQUA);
 		Image img = null;
 		try {
 			img = new Image(getClass().getResource("/resources/venus.jpg").toURI().toString());
@@ -93,7 +93,7 @@ J: jump
 		return true;
 	}
 
-	public void moveUpLeft() {
+	public boolean moveUpLeft() {
 		if (check(col-1, row-1)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col - 1;
@@ -101,18 +101,20 @@ J: jump
 			HiVolts.board.squares[row][col] = 2;
 			super.moveUpLeft();
 		}
+		return true;
 	}
 
-	public void moveLeft() {
+	public boolean moveLeft() {
 		if (check(col-1, row)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col - 1;
 			HiVolts.board.squares[row][col] = 2;
 			super.moveLeft();
 		}
+		return true;
 	}
 
-	public void moveUpRight() {
+	public boolean moveUpRight() {
 		if (check(col+1, row-1)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col + 1;
@@ -120,18 +122,20 @@ J: jump
 			HiVolts.board.squares[row][col] = 2;
 			super.moveUpRight();
 		}
+		return true;
 	}
 
-	public void moveRight() {
+	public boolean moveRight() {
 		if (check(col+1, row)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col + 1;
 			HiVolts.board.squares[row][col] = 2;
 			super.moveRight();
 		}
+		return true;
 	}
 
-	public void moveDownLeft() {
+	public boolean moveDownLeft() {
 		if (check(col-1, row+1)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col - 1;
@@ -139,27 +143,30 @@ J: jump
 			HiVolts.board.squares[row][col] = 2;
 			super.moveDownLeft();
 		}
+		return true;
 	}
 
-	public void moveUp() {
+	public boolean moveUp() {
 		if (check(col, row-1)) {
 			HiVolts.board.squares[row][col] = 0;
 			row = row - 1;
 			HiVolts.board.squares[row][col] = 2;
 			super.moveUp();
 		}
+		return true;
 	}
 
-	public void moveDown() {
+	public boolean moveDown() {
 		if (check(col, row+1)) {
 			HiVolts.board.squares[row][col] = 0;
 			row = row + 1;
 			HiVolts.board.squares[row][col] = 2;
 			super.moveDown();
 		}
+		return true;
 	}
 
-	public void moveDownRight() {
+	public boolean moveDownRight() {
 		if (check(col+1, row+1)) {
 			HiVolts.board.squares[row][col] = 0;
 			col = col + 1;
@@ -167,6 +174,7 @@ J: jump
 			HiVolts.board.squares[row][col] = 2;
 			super.moveDownRight();
 		}
+		return true;
 	}
 
 	Random rn = new Random();

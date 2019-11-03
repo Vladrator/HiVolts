@@ -22,7 +22,7 @@ public class Piece extends Rectangle {
 		return (row+1) * HiVolts.OFFSET;
 	}
 	
-	Piece(int col, int row, String type, Color color) {
+	Piece(int row, int col, String type, Color color) {
 		super(HiVolts.WIDTH, HiVolts.HEIGHT, color);
 
 		this.col = col;
@@ -35,36 +35,44 @@ public class Piece extends Rectangle {
 
 	}
 
-	public void moveUpLeft() {
+	public boolean moveUpLeft() {
 		slide(xProperty(), getX() - HiVolts.OFFSET, yProperty(), getY() - HiVolts.OFFSET);
+		return true;
 	}
 	
-	public void moveUpRight() {
+	public boolean moveUpRight() {
 		slide(xProperty(), getX() + HiVolts.OFFSET, yProperty(), getY() - HiVolts.OFFSET);
+		return true;
 	}
 	
-	public void moveLeft() {
+	public boolean moveLeft() {
 		slide(xProperty(), getX() - HiVolts.OFFSET,  null, 0);
+		return true;
 	}
 	
-	public void moveRight() {
+	public boolean moveRight() {
 		slide(xProperty(), getX() + HiVolts.OFFSET,  null, 0);
+		return true;
 	}
 	
-	public void moveDownLeft() {
+	public boolean moveDownLeft() {
 		slide(xProperty(), getX() - HiVolts.OFFSET, yProperty(), getY() + HiVolts.OFFSET);
+		return true;
 	}
 	
-	public void moveUp() {
+	public boolean moveUp() {
 		slide(null, 0, yProperty(), getY() - HiVolts.OFFSET);
+		return true;
 	}
 	
-	public void moveDown() {
+	public boolean moveDown() {
 		slide(null, 0, yProperty(), getY() + HiVolts.OFFSET);
+		return true;
 	}
 	
-	public void moveDownRight() {
+	public boolean moveDownRight() {
 		slide(xProperty(), getX() + HiVolts.OFFSET, yProperty(), getY() + HiVolts.OFFSET);
+		return true;
 	}
 
 	public void moveJump() { 
@@ -78,7 +86,7 @@ public class Piece extends Rectangle {
 		KeyFrame yKeyFrame  = new KeyFrame(Duration.millis(300), yKeyValue);
 		timeline.getKeyFrames().addAll(yKeyFrame);
 		
-		double increase = 2;
+		double increase = 1.5;
 		
 		KeyValue heightValue  = new KeyValue(heightProperty(), HiVolts.HEIGHT * increase);
 		KeyFrame heightKeyFrame  = new KeyFrame(Duration.millis(150), heightValue);

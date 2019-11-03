@@ -43,7 +43,7 @@ public class HiVolts extends Application {
         gPane = new GridPane();
         root.setPrefSize(PANESIZE, PANESIZE);
         
-        board = new Board(12, 12, 0, 6);
+        board = new Board(12, 12, 20, 12);
         setupBoard(root, board);
         addLabel();
         addButton();
@@ -58,14 +58,14 @@ public class HiVolts extends Application {
         for(int row = 0; row < board.ROWS; row++) {
             for(int col = 0; col < board.COLS; col++) {
                 if (board.squares[row][col] == 1) {
-                    root.getChildren().add(new Fence(col, row));
+                    root.getChildren().add(new Fence(row, col));
                 }
                 if (board.squares[row][col] == 2) {
-                    you = new Avatar(col, row);
+                    you = new Avatar(row, col);
                     root.getChildren().add(you);
                 }
                 if (board.squares[row][col] == 3) {
-                    root.getChildren().add(new Mho(col, row));
+                    root.getChildren().add(new Mho(row, col));
                 }
             }
         }
@@ -103,6 +103,7 @@ public class HiVolts extends Application {
     	if (you.alive == false) {
     		return;
     	}
+    	board.printBoard();
         // move all the mhos
         pieces().forEach(s -> {
         	if (s instanceof Piece) {
@@ -149,7 +150,6 @@ public class HiVolts extends Application {
 
     void startUp(Stage stage) {
         Scene scene = new Scene(createContent());
-
        
         scene.setOnKeyPressed(e -> {
         	
@@ -167,6 +167,14 @@ public class HiVolts extends Application {
             	startUp(this.stage);
             }
             
+            if(Mho.mhoNum == 0) {
+            	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            	alert.setTitle("Restart");
+            	alert.setHeaderText(null);
+            	alert.setContentText("You Win!!!");
+            	alert.showAndWait();
+            	startUp(this.stage);
+            }
             label.setText("" + e.getCode());
         });
 

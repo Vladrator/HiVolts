@@ -3,7 +3,7 @@ import javafx.scene.paint.Color;
 
 class Fence extends Rectangle {
 
-	Fence(int col, int row) {
+	Fence(int row, int col) {
 		super(HiVolts.WIDTH, HiVolts.HEIGHT, Color.BLACK);
 		
 		//where to place the rectangles on the screen

@@ -6,6 +6,21 @@ public class Board {
 	int FENCES;
 	int MHOS;
 	public int[][] squares;
+	boolean test = true;
+	int [][] testSquares = { {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+			{1, 0, 2, 0, 1, 1, 1, 0, 0, 1, 0, 1},
+			{1, 0, 0, 0, 1, 3, 0, 0, 0, 1, 0, 1},
+			{1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+			{1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1},
+			{1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1},
+			{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	};
+
 
 
 	/*
@@ -18,19 +33,26 @@ public class Board {
 		Board board = new Board(12, 12, 0, 0);
 		board.printBoard();
 	}
-	
+
 	public Board(int rows, int cols, int fences, int mhos) {
 		ROWS = rows;
 		COLS = cols;
 		FENCES = fences;
 		MHOS = mhos;
-		
+
 		squares = new int[ROWS][COLS];
 		createFences();
 		createMhos();
 		placeAvitar();
+		if (test) {
+			for (int i = 0; i <= 11; i++) { 
+				for (int x =0; x <= 11 ; x++) {
+					squares[i][x] = testSquares[i][x];
+				}
+			}
+		}
 	}
-	
+
 	private void createFences() {
 		setBorder();
 		// now generate 20 random fence posts
@@ -113,11 +135,11 @@ public class Board {
 
 	}
 
-	void printBoard() {
+	public void printBoard() {
 		for(int row=0; row < ROWS; row++) {
 			for(int col=0; col <COLS; col++) {
 				if (squares[row][col] == 0) {
-					System.out.print(" ");
+					System.out.print(".");
 				} else {
 					System.out.print(squares[row][col]);
 				}
