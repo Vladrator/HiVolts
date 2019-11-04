@@ -1,6 +1,6 @@
 import java.util.Random;
 
-// Presley
+// Presley Zhang
 
 public class Board {
 	
@@ -177,7 +177,8 @@ public class Board {
 	}
 	
 	/**
-	 * Example of a possible 12x12 board that is printed: (. = empty, 1 = fence, 2 = avatar, 3 = mho)
+	 * Example of a possible 12x12 board that is printed because of the function above: 
+	 * (. = empty, 1 = fence, 2 = avatar, 3 = mho)
 	 * 111111111111
 	 * 1..1.......1
 	 * 1..1......31

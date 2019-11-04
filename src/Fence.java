@@ -1,7 +1,7 @@
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-// Presley
+// Presley Zhang
 
 class Fence extends Rectangle {
 

@@ -5,7 +5,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 
-// Aaron
+// Aaron Yuan
 
 // controls all fx animations
 public class Piece extends Rectangle {

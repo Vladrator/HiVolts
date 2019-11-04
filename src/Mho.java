@@ -3,7 +3,7 @@ import java.net.URISyntaxException;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
-// Kian
+// Kian Calnan
 
 class Mho extends Piece {
 	

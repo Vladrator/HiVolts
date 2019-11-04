@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.ImagePattern;
 
-//Aaron
+//Aaron Yuan
 
 class Avatar extends Piece {
 
