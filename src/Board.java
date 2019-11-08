@@ -73,7 +73,7 @@ public class Board {
 	 */
 	private void createFences() { 
 		setBorder();
-		// now generate 20 random fence posts
+		// now generate # random fence posts
 		Random rn = new Random();
 		for(int num = 0; num < FENCES; num ++) {
 			int row=0;
@@ -114,7 +114,7 @@ public class Board {
 	 * (on an empty space)
 	 */
 	private void createMhos() {
-		// now generate 20 random fence posts
+		// now generate # random mhos
 		Random rn = new Random();
 		for(int num = 0; num < MHOS; num ++) {
 			int row=0;
